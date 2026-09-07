@@ -28,7 +28,7 @@
 
 #define checkCUDAErrorWithLine(msg) checkCUDAError(msg, __LINE__)
 
-#define NEIGHBORING_CELLS_27 1
+#define NEIGHBORING_CELLS_27 0
 /**
 * Check for CUDA errors; print and exit if there was a problem.
 */
@@ -49,7 +49,7 @@ void checkCUDAError(const char *msg, int line = -1) {
 *****************/
 
 /*! Block size used for CUDA kernel launch. */
-#define blockSize 128
+#define blockSize 4
 
 // LOOK-1.2 Parameters for the boids algorithm.
 // These worked well in our reference implementation.
@@ -804,7 +804,7 @@ void Boids::stepSimulationNaive(float dt) { // idk whats going on here? review n
 
     float milliseconds = 0;
     cudaEventElapsedTime(&milliseconds, start, stop);
-    std::cout << "Time taken Naive: " << milliseconds << " ms" << std::endl;
+    //std::cout << "Time taken Naive: " << milliseconds << " ms" << std::endl;
 
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
@@ -863,7 +863,7 @@ void Boids::stepSimulationScatteredGrid(float dt) {
   cudaEventSynchronize(stop);
   float milliseconds = 0;
     cudaEventElapsedTime(&milliseconds, start, stop);
-    std::cout << "Time taken Scattered Grid: " << milliseconds << " ms" << std::endl;
+    //std::cout << "Time taken Scattered Grid: " << milliseconds << " ms" << std::endl;
 
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
@@ -932,7 +932,7 @@ void Boids::stepSimulationCoherentGrid(float dt) {
     cudaEventSynchronize(stop);
     float milliseconds = 0;
     cudaEventElapsedTime(&milliseconds, start, stop);
-    std::cout << "Time taken Coherent: " << milliseconds << " ms" << std::endl;
+    //std::cout << "Time taken Coherent: " << milliseconds << " ms" << std::endl;
 
     cudaEventDestroy(start);
     cudaEventDestroy(stop);
